@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "576029669648-ce824rvds944ikfujbqabg74ci5r1l4m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ojasxlabs.cricketlogics",
+            "certificate_hash": "5cabb529331cb2f322bc3a9ba5761534238ca7f7"
+          }
+        },
+        {
+          "client_id": "576029669648-b2tn9fgalc7kl42965optqg1hss9h1m6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ojasxlabs.cricketlogics",
+            "certificate_hash": "5fbbde8e74fa6ce83c63fb5d69bb70c227766c55"
+          }
+        },
+        {
           "client_id": "576029669648-dufi0s3bq4j7dpv1q7ogvq42l247qnt2.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -25,17 +41,16 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
+          "other_platform_oauth_client": [
+            {
+              "client_id": "576029669648-dufi0s3bq4j7dpv1q7ogvq42l247qnt2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
-      }
+      },
+      "admob_app_id": "ca-app-pub-4327627819814341~7447187245"
     }
   ],
   "configuration_version": "1"

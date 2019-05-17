@@ -25,7 +25,7 @@ public class WelcomeScreen extends AppCompatActivity {
         textView=(TextView)findViewById(R.id.textView);
         textView.setText("");
 
-        final long period = 100;
+        final long period = 60;
         timer=new Timer();
         timer.schedule(new TimerTask() {
             @Override
