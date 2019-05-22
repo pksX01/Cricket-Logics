@@ -6,4 +6,7 @@
     <color name="textColorPrimary">#FFFFFF</color>
     <color name="windowBackground">#FFFFFF</color>
     <color name="navigationBarColor">#000000</color>
+    <color name="insta_color">#e4405f</color>
+    <color name="custom_green">#10893E</color>
+    <color name="custom_red">#E3008C</color>
 </resources>

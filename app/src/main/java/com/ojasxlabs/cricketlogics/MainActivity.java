@@ -1,5 +1,8 @@
 package com.ojasxlabs.cricketlogics;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.os.Build;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,6 +14,8 @@ import android.support.v7.widget.Toolbar;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.google.firebase.messaging.FirebaseMessaging;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    public static final String CHANNEL_ID = "Cricket_Logics";
+    public static final String CHANNEL_NAME = "Cricket Logics";
+    public static final String CHANNEL_DESC = "Cricket Logics Notification";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
@@ -51,74 +59,15 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        /* match = new Match();
-                db = FirebaseDatabase.getInstance();
-                db_ref=db.getReference();
-               if(db==null) {
+        FirebaseMessaging.getInstance().subscribeToTopic("Updates");
 
-                    db.setPersistenceEnabled(true);
-               }*/
-       /* mListView = (ListView) findViewById(R.id.list);
-        data = new ArrayList<>();
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,data)
-        {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setDescription(CHANNEL_DESC);
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
 
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent){
-
-                // Get the Item from ListView
-                View view = super.getView(position, convertView, parent);
-
-                    // Initialize a TextView for ListView each Item
-                    TextView tv = (TextView) view.findViewById(android.R.id.text1);
-                if(position==0 || position==3 || position==6 || position==9 ) {
-                    // Set the text color of TextView (ListView Item)
-                    tv.setTextColor(Color.RED);
-                }
-                else if (position==2 || position==5 || position==8 || position==11)
-                    tv.setTextColor(Color.BLUE);
-                // Generate ListView Item using TextView
-                return view;
-
-            }
-
-
-        };
-
-            db_ref.addChildEventListener(new ChildEventListener() {
-                @Override
-                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                    //for(DataSnapshot ds : dataSnapshot.getChildren()){
-
-                        match = dataSnapshot.getValue(Match.class);
-                        data.add("Match "+ (i++) + " : " + match.getDate());
-                        data.add(match.getTeam1() + " vs " + match.getTeam2());
-                        data.add("Winner : " + match.getWinner());
-
-                   // }
-                    mListView.setAdapter(arrayAdapter);
-                }
-
-                @Override
-                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                }
-
-                @Override
-                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-                }
-
-                @Override
-                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });*/
 
     }
 
@@ -126,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new WorldCupScheduleFragment(), "World Cup Schedule");
         adapter.addFragment(new MatchPrediction(), "Match Prediction");
+        //adapter.addFragment(new AllMatches(), "Upcoming Matches");
         viewPager.setAdapter(adapter);
     }
 
