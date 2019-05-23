@@ -1,9 +1,7 @@
 package com.ojasxlabs.cricketlogics;
 
-import android.app.LauncherActivity;
+
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,19 +18,18 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.joda.time.format.DateTimeFormat;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-import java.util.TimeZone;
+
+import am.appwise.components.ni.NoInternetDialog;
 
 
 public class LiveScore extends Fragment {
@@ -43,6 +40,7 @@ public class LiveScore extends Fragment {
     String matchStatus;
     String dateTime;
     String formattedDate;
+    NoInternetDialog noInternetDialog;
     public LiveScore() {
         // Required empty public constructor
     }
@@ -60,12 +58,13 @@ public class LiveScore extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_live_score, container, false);
+        noInternetDialog = new NoInternetDialog.Builder(getContext()).build();
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         listItems = new ArrayList<>();
         loadRecyclerViewData();
-
+        
         return view;
     }
 
@@ -138,4 +137,9 @@ public class LiveScore extends Fragment {
 
     }
 
+    @Override
+    public  void onDestroy() {
+        super.onDestroy();
+        noInternetDialog.onDestroy();
+    }
 }
