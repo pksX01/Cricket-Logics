@@ -2,6 +2,7 @@ package com.ojasxlabs.cricketlogics;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Intent;
 import android.os.Build;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
@@ -50,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -58,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+
 
         FirebaseMessaging.getInstance().subscribeToTopic("Updates");
 
@@ -71,11 +75,40 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return true;
+    }// assign action to menu items
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if(id == R.id.about_us) {
+            // Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
+            Intent settingIntent = new Intent(MainActivity.this, AboutUs.class);
+            startActivity(settingIntent);
+            return false;
+        }
+        else if(id == R.id.share) {
+            Intent i = new Intent(android.content.Intent.ACTION_SEND);
+            i.setType("text/plain");
+            startActivity(Intent.createChooser(i,"Share Using"));
+            return super.onOptionsItemSelected(item);
+        }
+        else{
+            Intent feedbackIntent = new Intent(MainActivity.this, RateThisApp.class);
+            startActivity(feedbackIntent);
+            return false;
+        }
+
+    }
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new WorldCupScheduleFragment(), "World Cup Schedule");
         adapter.addFragment(new MatchPrediction(), "Match Prediction");
-        //adapter.addFragment(new AllMatches(), "Upcoming Matches");
+        adapter.addFragment(new LiveScore(), "Recent and Upcoming Matches");
         viewPager.setAdapter(adapter);
     }
 
