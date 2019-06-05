@@ -2,10 +2,12 @@ package com.ojasxlabs.cricketlogics;
 
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.style.LocaleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +42,7 @@ public class LiveScore extends Fragment {
     String matchStatus;
     String dateTime;
     String formattedDate;
+
     NoInternetDialog noInternetDialog;
     public LiveScore() {
         // Required empty public constructor
@@ -64,7 +67,7 @@ public class LiveScore extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         listItems = new ArrayList<>();
         loadRecyclerViewData();
-        
+
         return view;
     }
 
@@ -84,9 +87,12 @@ public class LiveScore extends Fragment {
 
                             for(int i=0; i<array.length();i++){
                                 JSONObject o = array.getJSONObject(i);
+
                                 String matchStarted = o.getString("matchStarted");
-                                if(matchStarted.equals("true"))
-                                    matchStatus="Match started";
+
+                                if(matchStarted.equals("true")) {
+                                    matchStatus = "Match started";
+                                }
                                 else
                                     matchStatus = "Match is not started yet";
 
@@ -108,6 +114,7 @@ public class LiveScore extends Fragment {
                                         //o.getString("squad"),
                                         o.getString("team-2"),
                                         o.getString("team-1"),
+                                        o.getString("type"),
                                         matchStatus
                                 );
 
@@ -119,6 +126,7 @@ public class LiveScore extends Fragment {
                         }
                        catch (JSONException e){
                             e.printStackTrace();
+                           Toast.makeText(getActivity(), e.getMessage(),Toast.LENGTH_LONG).show();
                        }
 
                     }

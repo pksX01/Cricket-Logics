@@ -1,7 +1,9 @@
 package com.ojasxlabs.cricketlogics;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,14 +31,24 @@ public class AdapterForLiveScore extends RecyclerView.Adapter<AdapterForLiveScor
 
     @Override
     public void onBindViewHolder(@NonNull AdapterForLiveScore.ViewHolder viewHolder, int i) {
-        ListItemForLiveScore listItem = listItems.get(i);
+       final ListItemForLiveScore listItem = listItems.get(i);
 
         //viewHolder.textUniqueId.setText(listItem.getUniqueId());
         viewHolder.textDate.setText(listItem.getDate());
-        //viewHolder.textSquad.setText(listItem.getSquad());
+        viewHolder.textType.setText("Match Type: " + listItem.getMatch_type());
         viewHolder.textTeam2.setText(listItem.getTeam2());
         viewHolder.textTeam1.setText(listItem.getTeam1());
         viewHolder.textMatchStarted.setText("Match Status : "+listItem.getMatchStarted());
+        /*viewHolder.cardview_match.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String match_id = listItem.getUniqueId();
+                Intent intent = new Intent(context, ScoreHelper.class);
+                intent.putExtra("uniqueId", match_id);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        });*/
     }
 
     @Override
@@ -48,20 +60,21 @@ public class AdapterForLiveScore extends RecyclerView.Adapter<AdapterForLiveScor
 
        // public TextView textUniqueId;
         public TextView textDate;
-       // public TextView textSquad;
+       public TextView textType;
         public TextView textTeam2;
         public TextView textTeam1;
         public TextView textMatchStarted;
+      //  public CardView cardview_match;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
            // textUniqueId = (TextView) itemView.findViewById(R.id.uniqueId);
             textDate = (TextView) itemView.findViewById(R.id.date);
-           //textSquad = (TextView) itemView.findViewById(R.id.squad);
+           textType = (TextView) itemView.findViewById(R.id.matchType);
             textTeam2 = (TextView) itemView.findViewById(R.id.team2);
             textTeam1 = (TextView) itemView.findViewById(R.id.team1);
             textMatchStarted = (TextView) itemView.findViewById(R.id.matchStarted);
-
+          //  cardview_match = (CardView) itemView.findViewById(R.id.Match_cardView);
         }
     }
 }

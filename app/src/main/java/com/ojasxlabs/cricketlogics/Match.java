@@ -4,7 +4,7 @@ public class Match {
     private String Team1;
     private String Team2;
     private String Winner;
-    private String Toss_winner;
+   // private String Toss_winner;
     private String Date;
 
     public Match() {
@@ -13,11 +13,11 @@ public class Match {
 
 
 
-    public Match(String date, String team1, String team2, String toss_winner, String winner ) {
+    public Match(String date, String team1, String team2, /*String toss_winner,*/ String winner ) {
         Date = date;
         Team1 = team1;
         Team2 = team2;
-        Toss_winner = toss_winner;
+        //Toss_winner = toss_winner;
         Winner = winner;
 
     }
@@ -54,11 +54,11 @@ public class Match {
         Date = date;
     }
 
-    public String getToss_winner() {
+   /* public String getToss_winner() {
         return Toss_winner;
     }
 
     public void setToss_winner(String toss_winner) {
         Toss_winner = toss_winner;
-    }
+    }*/
 }

@@ -5,7 +5,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -35,9 +34,8 @@
         </service>
 
         <activity android:name=".AboutUs" />
-        <activity android:name=".RateThisApp"></activity>
-
-
+        <activity android:name=".RateThisApp" />
+        <activity android:name=".ScoreHelper"></activity>
     </application>
 
 </manifest>

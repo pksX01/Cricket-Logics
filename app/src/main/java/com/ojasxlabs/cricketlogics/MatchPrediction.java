@@ -97,8 +97,9 @@ public class MatchPrediction extends Fragment {
                         match = dataSnapshot.getValue(Match.class);
                         data.add("Match "+ (i++) + " : " + match.getDate());
                         data.add(match.getTeam1() + " vs " + match.getTeam2());
+                        //data.add("Predicted Toss Winner : " + match.getToss_winner());
                         data.add("Predicted Winner : " + match.getWinner());
-                        data.add("Predicted Toss Winner : " + match.getToss_winner());
+
                         // }
                         mListView.setAdapter(arrayAdapter);
                     }
