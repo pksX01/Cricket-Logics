@@ -47,10 +47,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-       // MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713 ");
-        //mAdView = findViewById(R.id.adView);
-        //AdRequest adRequest = new AdRequest.Builder()/*.addTestDevice("9762F7D37EE798D43AF75C9C8573B8ED")*/.build();
-        //mAdView.loadAd(adRequest);
+        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713 ");
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder()/*.addTestDevice("9762F7D37EE798D43AF75C9C8573B8ED")*/.build();
+        mAdView.loadAd(adRequest);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -106,8 +106,8 @@ public class MainActivity extends AppCompatActivity {
     }
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new WorldCupScheduleFragment(), "World Cup Schedule");
         adapter.addFragment(new MatchPrediction(), "Match Prediction");
+        adapter.addFragment(new WorldCupScheduleFragment(), "World Cup Schedule");
         adapter.addFragment(new LiveScore(), "Recent and Upcoming Matches");
         viewPager.setAdapter(adapter);
     }

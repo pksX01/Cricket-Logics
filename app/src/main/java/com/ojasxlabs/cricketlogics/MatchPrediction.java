@@ -74,12 +74,12 @@ public class MatchPrediction extends Fragment {
                         // Initialize a TextView for ListView each Item
                         TextView tv = (TextView) view.findViewById(android.R.id.text1);
 
-                        if(position==0 || position==4 || position==8 || position==12 ) {
+                        if(position==0 || position==3 || position==6 || position==9 ) {
                             // Set the text color of TextView (ListView Item)
                            tv.setTextColor(Color.WHITE);
                             tv.setBackgroundResource(R.drawable.custim_red_color);
                         }
-                        else if (position==2 || position==6 || position==10 || position==14)
+                        else if (position==2 || position==5 || position==8 || position==11)
                             tv.setTextColor(getResources().getColor(R.color.insta_color));
                         // Generate ListView Item using TextView
                         return view;

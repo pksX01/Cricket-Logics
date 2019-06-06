@@ -9,7 +9,7 @@ import android.support.v4.app.NotificationManagerCompat;
 
 public class NotificationHelper {
     public static void displayNotification(Context context, String title, String body){
-        Intent intent = new Intent(context, MainActivity.class);
+        Intent intent = new Intent(context, MatchPrediction.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(
           context, 100, intent, PendingIntent.FLAG_CANCEL_CURRENT
         );
